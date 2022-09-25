@@ -13,6 +13,7 @@ const ListPokemonTable = () => {
       },[]);
     
     let pokemons = useSelector((state: RootState)=> state.pokemons.pokemon);
+    console.log(pokemons)
 
   return (
     <div>
@@ -25,8 +26,8 @@ const ListPokemonTable = () => {
             </thead>
             <tbody>
                 {pokemons.map((item:any) => 
-                    <tr className='h-12 border-b-slate-200 border-b-[1px]'>
-                    <td className='text-start text-inti font-bold'>{item.name}</td>
+                    <tr className='h-12 border-b-slate-200 border-b-[1px]' key={item.id}>
+                    <td className='text-start text-inti font-bold capitalize'>{item.name}</td>
                     <td className='text-end font-bold'>{item.stock}</td>
                     </tr>
                 )}
