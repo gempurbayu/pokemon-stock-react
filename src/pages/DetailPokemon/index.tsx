@@ -1,7 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import Header from '../../components/Header'
+import UpdateStokModal from '../../components/UpdateStokModal';
 
 const DetailPokemon = () => {
+    let { id } = useParams();
+    
+    let [open, setOpenModal] = useState(false);
+
+    const handleModal = () => {
+        setOpenModal(true);
+    }
+
+    const closeModal = () => {
+        setOpenModal(false);
+    }
+
   return (
     <div className=''>
         <Header/>
@@ -9,7 +23,9 @@ const DetailPokemon = () => {
             {/* Title Page */}
             <div className='section2 w-full mt-6 flex flex-col font-rubik h-140 py-4'>
                 <h1 className='text-[28px] font-bold mb-6 text-basecolor'>Pikachu</h1>
-                <button className='border-gray-200 border-2 rounded-[4px] py-0.5 text-sm w-[105px] h-10 font-bold text-inti bg-gray-100 shadow-sm'>Update Stok</button>
+                <button className='border-gray-200 border-2 rounded-[4px] py-0.5 text-sm w-[105px] h-10 font-bold text-inti bg-gray-100 shadow-sm'
+                        onClick={handleModal}
+                >Update Stok</button>
             </div>
             <div className='stok-info flex flex-col w-full text-start mt-4 mb-[40px]'>
                 <p className='text-sm'>Sisa stok</p>
@@ -36,12 +52,13 @@ const DetailPokemon = () => {
                                 </div>
                             </td>
                             <td className='w-3/12 text-right text-inti text-sm'>+10</td>
-                            <td className='w-3/12 text-right font-bold text-basecolor'>Stok</td>
+                            <td className='w-3/12 text-right font-bold text-basecolor'>{id}</td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+        <UpdateStokModal open={open} close={closeModal}/>
        
     </div>
   )

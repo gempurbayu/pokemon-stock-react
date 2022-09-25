@@ -8,7 +8,6 @@ const SearchInput = () => {
                 type='text'
                 name='search' 
                 placeholder='Cari Pokemon'>
-                
         </input>
     </div>
   )
