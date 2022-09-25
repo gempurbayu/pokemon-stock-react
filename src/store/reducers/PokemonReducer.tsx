@@ -1,9 +1,11 @@
 interface MyPokemon {
-    pokemon : []
+    pokemon : [],
+    history: [],
 }
 
 const initialState = {
-    pokemon: []
+    pokemon: [],
+    history: [],
 } as MyPokemon
 
 const PokemonReducer = (state = initialState, action: { type: any; payload: any }) => {
@@ -14,7 +16,8 @@ const PokemonReducer = (state = initialState, action: { type: any; payload: any 
         case "SET_DATA_POKEMON":
             return {
                 ...state,
-                pokemon: payload
+                pokemon: payload.pokemons,
+                history: payload.history
             }
 
     }

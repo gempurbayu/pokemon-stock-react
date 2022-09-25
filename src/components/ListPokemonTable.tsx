@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../store';
 import { setDataPokemon } from '../store/actions';
 
@@ -8,13 +9,21 @@ import { setDataPokemon } from '../store/actions';
 const ListPokemonTable = () => {
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        dispatch(setDataPokemon() as any);
-      },[]);
-    
-    let pokemons = useSelector((state: RootState)=> state.pokemons.pokemon);
-    console.log(pokemons)
+    let navigate =  useNavigate();
 
+    useEffect(() => {
+      dispatch(setDataPokemon() as any);
+    }, []);
+     
+    let pokemons = useSelector((state: RootState)=> state.pokemons.pokemon);
+    let history = useSelector((state: RootState)=> state.pokemons.history);
+    console.log(pokemons, history)
+
+    const goToDetail = (id: any) => {
+      
+      navigate(`/pokemon/${id}`)
+    }
+        
   return (
     <div>
         <table className='table-auto mt-6 w-full font-nunito'>
@@ -25,8 +34,8 @@ const ListPokemonTable = () => {
                 </tr>
             </thead>
             <tbody>
-                {pokemons.map((item:any) => 
-                    <tr className='h-12 border-b-slate-200 border-b-[1px]' key={item.id}>
+                {pokemons?.map((item:any) => 
+                    <tr className='h-12 border-b-slate-200 border-b-[1px]' key={item.id} onClick={() => goToDetail(item.id)}>
                     <td className='text-start text-inti font-bold capitalize'>{item.name}</td>
                     <td className='text-end font-bold'>{item.stock}</td>
                     </tr>

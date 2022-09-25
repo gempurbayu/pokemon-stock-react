@@ -7,24 +7,32 @@ export const setDataPokemon = () => {
         .then(result => {
             const responseAPI = result.data.results;
             let pokemons = [];
+            let history = [];
             for(let i = 0; i < responseAPI.length; i++){
-                let object = {
+                let objPokemon = {
                     id: i+1,
                     name: responseAPI[i]?.name,
-                    history: [
-                        {
-                            id: 1,
-                            action: "Stock Awal",
-                            description: "Stock Awal",
-                            total: 0,
-                            prevStock: 0,
-                        },
-                    ],
-                    stock: 0,
+                    stock: 0
                 };
-                pokemons.push(object);
+
+                let objHistory = {
+                    id: 1,
+                    idPokemon: objPokemon.id,
+                    action: "Stock Awal",
+                    description: "Stock Awal",
+                    total: 0,
+                    prevStock: 0,
+                    date: new Date(Date.now())
+                }
+                pokemons.push(objPokemon);
+                history.push(objHistory);
             }
-            dispatch({type: 'SET_DATA_POKEMON', payload: pokemons});
+
+            const data = {
+                pokemons,
+                history,
+            }
+            dispatch({type: 'SET_DATA_POKEMON', payload: data});
         })
         .catch(err => {
             console.log('error: ', err);
