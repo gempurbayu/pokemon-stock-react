@@ -16,7 +16,6 @@ export const setDataPokemon = () => {
                 };
 
                 let objHistory = {
-                    id: 1,
                     idPokemon: objPokemon.id,
                     action: "Stock Awal",
                     description: "Stock Awal",
@@ -39,3 +38,11 @@ export const setDataPokemon = () => {
         })
     }
 }
+
+export const UpdateStokConfirmation = (data: any) => {
+    return {
+        type : "UPDATE_STOK_CONFIRMATION",
+        payload : data
+    }
+}
+

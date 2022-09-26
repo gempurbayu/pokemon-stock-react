@@ -1,13 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 interface ModalProps {
-    open: boolean;
-    close: any;
+    open: boolean,
+    close: any,
+    pokemonid : any
+
 }
 
 const UpdateStokModal = (props: ModalProps) => {
 
-    const { open, close } = props;
+    const { open, close, pokemonid } = props;
+
+    let [update, setUpdate] = useState({
+        pcs : 0,
+        lusin: 0,
+        total: 0,
+        pokemonid: Number(pokemonid)
+    });
+    let [pcs, setPcs] = useState(0);
+    let [lusin, setLusin] = useState(0);
+
+    const handlePcs = (e: any) => {
+        let num = Number(e.target.value * 1);
+
+        setPcs(num);
+        setUpdate((prevState) => ({
+            ...prevState,
+            pcs: num,
+            total: num + lusin
+          }))
+    }
+
+    const handleLusin = (e: any) => {
+        let num = e.target.value * 12;
+        setLusin(num);
+        setUpdate((prevState) => ({
+            ...prevState,
+            lusin: num,
+            total: num + pcs
+          }))
+    }
+
+    console.log(update)
+
     if(open) {
         return (
             <div className='absolute bg-gray-900 bg-opacity-40 w-[100vw] h-[100vh] top-0 left-0 text-basecolor'>
@@ -30,30 +65,41 @@ const UpdateStokModal = (props: ModalProps) => {
                                     <span className='my-auto font-normal w-5/12 text-end pr-[8%]'>1 <span>x</span> </span>
                                     <input className="shadow appearance-none border rounded w-5/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="jumlah" 
-                                            type='text'
+                                            type='number'
                                             name='jumlah' 
-                                            placeholder=''>
+                                            placeholder=''
+                                            onChange={(e) => handlePcs(e)}
+                                            >
                                     </input>
                                     <span className='my-auto font-normal w-2/12'>=</span>
                                     </div>
                                 </td>
-                                <td className='text-end font-normal capitalize text-sm'>0</td>
+                                <td className='text-end font-normal capitalize text-sm'>{pcs}</td>
                             </tr>
-                            <tr className='h-14 border-b-slate-200 border-b-[1px]'>
+                            <tr className='h-14 border-b-slate-800 border-b-[1px]'>
                                 <td className='text-start font-bold capitalize text-sm'>Lusin</td>
                                 <td className='text-end font-bold'>
                                     <div className='w-full flex flex-row'>
                                     <span className='my-auto font-normal w-5/12 text-end pr-[8%]'>12 <span>x</span> </span>
                                     <input className="shadow appearance-none border rounded w-5/12 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                             id="jumlah" 
-                                            type='text'
+                                            type='number'
                                             name='jumlah' 
-                                            placeholder=''>
+                                            placeholder=''
+                                            onChange={(e) => handleLusin(e)}
+                                            >
                                     </input>
                                     <span className='my-auto font-normal w-2/12'>=</span>
                                     </div>
                                 </td>
-                                <td className='text-end font-normal capitalize text-sm'>0</td>
+                                <td className='text-end font-normal capitalize text-sm'>{lusin}</td>
+                            </tr>
+                            <tr className='h-14'>
+                                <td className='text-start font-bold capitalize text-sm'>Total Stok <span className='font-normal'>(dalam pcs)</span></td>
+                                <td className='text-end font-bold'>
+                                    
+                                </td>
+                                <td className='text-end font-normal capitalize text-sm'>{update.total}</td>
                             </tr>
                         </tbody>
                     </table>

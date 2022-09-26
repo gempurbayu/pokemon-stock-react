@@ -1,1 +1,1 @@
-export * from './HomeAction'
+export * from './PokemonAction'

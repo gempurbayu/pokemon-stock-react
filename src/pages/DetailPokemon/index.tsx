@@ -30,7 +30,7 @@ const DetailPokemon = () => {
 
   return (
     <div className=''>
-        <Header/>
+        <Header title='Stok Pokémon' icon='back'/>
         <div className='w-full h-full px-[4%]'>
             {/* Title Page */}
             <div className='section2 w-full mt-6 flex flex-col font-rubik h-140 py-4'>
@@ -45,7 +45,7 @@ const DetailPokemon = () => {
             </div>
             <HistoryStock data={hstry}/>
         </div>
-        <UpdateStokModal open={open} close={closeModal}/>
+        <UpdateStokModal open={open} close={closeModal} pokemonid={id}/>
        
     </div>
   )

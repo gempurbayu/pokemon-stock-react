@@ -1,12 +1,8 @@
-interface MyPokemon {
-    pokemon : [],
-    history: [],
-}
-
 const initialState = {
     pokemon: [],
     history: [],
-} as MyPokemon
+    confirmation: [],
+}
 
 const PokemonReducer = (state = initialState, action: { type: any; payload: any }) => {
     const {type, payload} = action
