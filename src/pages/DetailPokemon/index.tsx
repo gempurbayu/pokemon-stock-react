@@ -10,13 +10,22 @@ const DetailPokemon = () => {
     let { id } = useParams();
     
     let [open, setOpenModal] = useState(false);
+    let historyByID = [];
 
     let pokemons = useSelector((state: RootState)=> state.pokemons.pokemon);
     let history = useSelector((state: RootState)=> state.pokemons.history);
     
     //find pokemon by id in params
     const poke = pokemons.find((item: any) => item.id === Number(id))
-    const hstry = history.find((item: any) => item.idPokemon === Number(id))
+    
+    if(historyByID.length === 0) {
+        for(let i = 0; i < history.length; i++){
+            if(history[i].idPokemon === Number(id)) {
+                historyByID.push(history[i])
+                console.log(history[i])
+            }
+        }
+    }
 
     const handleModal = () => {
         setOpenModal(true);
@@ -26,7 +35,7 @@ const DetailPokemon = () => {
         setOpenModal(false);
     }
     
-    console.log(poke, history)
+    console.log(historyByID)
 
   return (
     <div className=''>
@@ -43,7 +52,7 @@ const DetailPokemon = () => {
                 <p className='text-sm'>Sisa stok</p>
                 <p className='text-3xl'>{poke.stock} pcs</p>
             </div>
-            <HistoryStock data={hstry}/>
+            <HistoryStock data={historyByID}/>
         </div>
         <UpdateStokModal open={open} close={closeModal} pokemonid={id}/>
        
