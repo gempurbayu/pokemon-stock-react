@@ -35,7 +35,8 @@ const PokemonReducer = (state = initialState, action: { type: any; payload: any 
             return {
                 ...state,
                 pokemon: pokeman,
-                history: [...state.history, payload]
+                history: [...state.history, payload],
+                updateTemp: {}
 
             }
             

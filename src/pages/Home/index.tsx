@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ListPokemonTable from '../../components/ListPokemonTable';
 //import logo from '../assets/logo.svg';
 import '../App.css';
+import SearchIcon from '../../assets/icons/search.svg'
 
 function Home() {
 
@@ -13,7 +14,8 @@ function Home() {
       </div>
       <div>
       <div className='pt-12 text-left'>
-          <input className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      <img src={SearchIcon} alt='icon' className='absolute pt-1.5 pl-2'/>
+          <input className="shadow appearance-none border rounded w-full py-2 pl-10 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="search" 
                   type='text'
                   name='search' 

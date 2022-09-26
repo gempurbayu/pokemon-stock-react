@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Header from '../../components/Header'
 import ArrowIcon from '../../assets/icons/back.svg'
 import DetailStokOpname from '../../components/DetailStokOpname';
@@ -14,10 +14,11 @@ const ConfirmationUpdate = () => {
     const dispatch = useDispatch();
 
     let updateTemp = useSelector((state: RootState)=> state.pokemons.updateTemp);
+   
     let pokemon = useSelector((state: RootState)=> state.pokemons.pokemon);
 
     const poke = pokemon.find((item: any) => item.id === updateTemp.pokemonid)
-
+    
     let [confirmation, setConfirmation] = useState({
         idPokemon: Number(poke.id),
         action: updateTemp.action,
@@ -33,14 +34,6 @@ const ConfirmationUpdate = () => {
             description: e.target.value
         }))
     }
-
-    useEffect(() => {
-        if(!updateTemp) {
-            alert("update salah satu pokemon terlebih dahulu!")
-            navigate('/')
-        }
-    })
-
     const handleSubmit = () => {
         setConfirmation(prevState => ({
             ...prevState,
