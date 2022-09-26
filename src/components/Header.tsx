@@ -20,7 +20,7 @@ const Header = (props : HeaderProps) => {
             
         </div>
         <div className='Title w-8/12 text-center my-auto'>
-            <h3 className='text-md font-bold text-basecolor'>{title}</h3>
+            <h3 className='text-md font-bold text-basecolor capitalize'>{title}</h3>
         </div>
     </div>
   )

@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -5,8 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { RootState } from '../store';
 import { setDataPokemon } from '../store/actions';
 
+interface ListPokemonProps {
+  search: any
+}
 
-const ListPokemonTable = () => {
+const ListPokemonTable = (props : ListPokemonProps) => {
+
+    const { search } = props;
 
     const dispatch = useDispatch();
     let navigate =  useNavigate();
@@ -37,7 +43,13 @@ const ListPokemonTable = () => {
                 </tr>
             </thead>
             <tbody>
-                {pokemons?.map((item:any) => 
+                {pokemons?.filter((item:any) => {
+                  if(search === ''){
+                      return item
+                  } else if(item.name.includes(search.toLowerCase())){
+                    return item
+                  }
+                }).map((item:any) => 
                     <tr className='h-12 border-b-slate-200 border-b-[1px]' key={item.id} onClick={() => goToDetail(item.id)}>
                     <td className='text-start text-inti font-bold capitalize'>{item.name}</td>
                     <td className='text-end font-bold'>{item.stock}</td>

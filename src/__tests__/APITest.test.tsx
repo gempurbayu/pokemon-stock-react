@@ -12,7 +12,7 @@ describe("PokemonList Component", () => {
     render(
       <Provider store={store}>
         <Router>
-          <ListPokemonTable/>
+          <ListPokemonTable search='ivysaur'/>
         </Router>
       </Provider>
     )

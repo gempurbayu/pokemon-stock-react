@@ -60,7 +60,7 @@ const ConfirmationUpdate = () => {
 
   return (
     <div>
-        <Header title='Pikachu' icon='cancel'/>
+        <Header title={poke.name} icon='cancel'/>
         <div className='w-full h-full px-[4%] font-rubik text-basecolor'>
             {/* Title Page */}
             <div className='section2 w-full mt-6 flex flex-col font-rubik h-140 py-4'>
