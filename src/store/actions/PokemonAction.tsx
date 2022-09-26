@@ -21,7 +21,7 @@ export const setDataPokemon = () => {
                     description: "Stock Awal",
                     total: 0,
                     prevStock: 0,
-                    date: new Date(Date.now())
+                    date: Date()
                 }
                 pokemons.push(objPokemon);
                 history.push(objHistory);
@@ -45,4 +45,13 @@ export const UpdateStokConfirmation = (data: any) => {
         payload : data
     }
 }
+
+export const updateData = (data: any) => {
+    return {
+        
+        type : "UPDATE_DATA_TEMP",
+        payload : data
+    }
+}
+
 

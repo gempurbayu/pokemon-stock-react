@@ -11,16 +11,21 @@ const ListPokemonTable = () => {
     const dispatch = useDispatch();
     let navigate =  useNavigate();
 
-    useEffect(() => {
-      dispatch(setDataPokemon() as any);
-    }, []);
-     
     let pokemons = useSelector((state: RootState)=> state.pokemons.pokemon);
+    let history = useSelector((state: RootState)=> state.pokemons.history);
+
+    if(pokemons.length === 0){
+        dispatch(setDataPokemon() as any);
+    }
     
     const goToDetail = (id: any) => {
       
       navigate(`/pokemon/${id}`)
     }
+
+    console.log(history)
+    //localStorage.clear()
+    
         
   return (
     <div>

@@ -26,7 +26,7 @@ const DetailPokemon = () => {
         setOpenModal(false);
     }
     
-    console.log(poke, hstry)
+    console.log(poke, history)
 
   return (
     <div className=''>

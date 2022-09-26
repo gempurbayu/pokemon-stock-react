@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { updateData } from '../store/actions/PokemonAction'
 
 interface ModalProps {
     open: boolean,
@@ -11,11 +14,16 @@ const UpdateStokModal = (props: ModalProps) => {
 
     const { open, close, pokemonid } = props;
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
     let [update, setUpdate] = useState({
         pcs : 0,
         lusin: 0,
         total: 0,
-        pokemonid: Number(pokemonid)
+        pokemonid: Number(pokemonid),
+        description : '',
+        action: 'Update Stok'
     });
     let [pcs, setPcs] = useState(0);
     let [lusin, setLusin] = useState(0);
@@ -36,9 +44,18 @@ const UpdateStokModal = (props: ModalProps) => {
         setLusin(num);
         setUpdate((prevState) => ({
             ...prevState,
-            lusin: num,
+            lusin: e.target.value,
             total: num + pcs
           }))
+    }
+
+    const handleUpdate = () => {
+        try{
+            dispatch(updateData(update) as any)
+            navigate('/confirmation')
+        }catch(error) {
+            alert(error)
+        }
     }
 
     console.log(update)
@@ -68,6 +85,7 @@ const UpdateStokModal = (props: ModalProps) => {
                                             type='number'
                                             name='jumlah' 
                                             placeholder=''
+                                            required
                                             onChange={(e) => handlePcs(e)}
                                             >
                                     </input>
@@ -86,6 +104,7 @@ const UpdateStokModal = (props: ModalProps) => {
                                             type='number'
                                             name='jumlah' 
                                             placeholder=''
+                                            required
                                             onChange={(e) => handleLusin(e)}
                                             >
                                     </input>
@@ -105,7 +124,7 @@ const UpdateStokModal = (props: ModalProps) => {
                     </table>
                     <div className='btn-group w-full justify-end mt-4 flex flex-row'>
                     <button className='border-none border-0 rounded-[4px] py-0.5 text-sm w-[105px] h-10 font-bold text-white bg-inti shadow-sm shadow-inti mr-4'
-                        
+                            onClick={() => handleUpdate()}
                     >
                         Simpan
                     </button>
