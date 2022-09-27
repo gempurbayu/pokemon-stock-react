@@ -23,14 +23,19 @@ const ConfirmationUpdate = () => {
     const poke = pokemon.find((item: any) => item.id === updateTemp.pokemonid)
     
     useEffect(() => {
-        setConfirmation({
-            idPokemon: Number(poke.id),
-            action: updateTemp.action,
-            description: "",
-            total: Number(updateTemp.total),
-            prevStock: Number(poke.stock),
-            date: Date()
-        });
+
+        if(poke?.id === undefined){
+            navigate('/')
+        } else {
+            setConfirmation({
+                idPokemon: Number(poke.id),
+                action: updateTemp.action,
+                description: "",
+                total: Number(updateTemp.total),
+                prevStock: Number(poke.stock),
+                date: Date()
+            });
+        }
     },[updateTemp])
 
     const handleDescription = (e: any) => {
@@ -58,7 +63,7 @@ const ConfirmationUpdate = () => {
 
   return (
     <div>
-        <Header title={poke.name} icon='cancel'/>
+        <Header title={poke?.name} icon='cancel'/>
         <div className='w-full h-full px-[4%] font-rubik text-basecolor'>
             {/* Title Page */}
             <div className='section2 w-full mt-6 flex flex-col font-rubik h-140 py-4'>
@@ -71,7 +76,7 @@ const ConfirmationUpdate = () => {
             <div className='flex flex-row w-full justify-between mt-4 mb-10 py-auto'>
                 <div className='w-6/12'>
                     <p className='text-sm'>Di sistem</p>
-                    <p className='text-xl'>{poke.stock} pcs</p>
+                    <p className='text-xl'>{poke?.stock} pcs</p>
                 </div>
                 <div className='w-2/12 text-end'>
                     <img src={ArrowIcon} alt='arrow' className='rotate-180'/>
@@ -79,10 +84,10 @@ const ConfirmationUpdate = () => {
                 <div className='w-5/12 text-start'>
                     
                     <p className='text-sm'>Hasil update stok</p>
-                    <p className='text-xl'>{poke.stock + updateTemp.total}</p>
+                    <p className='text-xl'>{poke?.stock + updateTemp.total}</p>
                 </div>
             </div>
-            <DetailStokOpname data={updateTemp} prevstock={poke.stock} pokemonid={poke.id}/>
+            <DetailStokOpname data={updateTemp} prevstock={poke?.stock} pokemonid={poke?.id}/>
             <div className='w-full'>
                 <h3 className='font-bold text-[16px] mb-2 mt-4'>Catatan</h3>
                 <textarea className='w-full h-20 px-2 py-1 border-2 shadow-inner border-slate-300 rounded-md'
