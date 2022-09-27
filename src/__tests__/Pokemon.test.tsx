@@ -8,7 +8,7 @@ import DetailPokemon from '../pages/DetailPokemon';
 import renderer from 'react-test-renderer';
 
 describe("PokemonList Component", () => {
-  it("should render pokemon names when api responds", async () =>{
+  it("should render pokemon same pokemon name with search", async () =>{
     render(
       <Provider store={store}>
         <Router>

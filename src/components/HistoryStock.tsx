@@ -24,7 +24,7 @@ const HistoryStock = (props : HistoryProps) => {
     }    
   }
 
-  console.log(date, history)
+  console.log(date[0])
 
   return (
     <div className='riwayat w-full text-start flex flex-col font-rubik text-basecolor'>
@@ -41,6 +41,7 @@ const HistoryStock = (props : HistoryProps) => {
                             <th className='w-3/12 text-right'>Stok</th>
                         </tr>
                         {[...history].reverse().map((h: any, index:any) => 
+                        {if((h.date.substring(0,15)) === item.substring(0,15)){return(
                             <tr className='w-full text-basecolor h-[88px] my-auto border-b-2'>
                             <td className='w-6/12' key={index}>
                                 <div className='desc w-full flex flex-col'>
@@ -52,6 +53,10 @@ const HistoryStock = (props : HistoryProps) => {
                             <td className='w-3/12 text-right text-inti text-sm'>+{h.total}</td>
                             <td className='w-3/12 text-right font-bold text-basecolor'>{h.total}</td>
                         </tr>
+                        )}else{
+                            return(null)
+                        }
+                        }
                         )}
                     </table>
                 )}

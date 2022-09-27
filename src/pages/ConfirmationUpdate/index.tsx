@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
 import ArrowIcon from '../../assets/icons/back.svg'
 import DetailStokOpname from '../../components/DetailStokOpname';
@@ -13,20 +13,24 @@ const ConfirmationUpdate = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
+    let [confirmation, setConfirmation] = useState({})
+
     let updateTemp = useSelector((state: RootState)=> state.pokemons.updateTemp);
    
     let pokemon = useSelector((state: RootState)=> state.pokemons.pokemon);
 
     const poke = pokemon.find((item: any) => item.id === updateTemp.pokemonid)
     
-    let [confirmation, setConfirmation] = useState({
-        idPokemon: Number(poke.id),
-        action: updateTemp.action,
-        description: "",
-        total: Number(updateTemp.total),
-        prevStock: Number(poke.stock),
-        date: Date()
-    });
+    useEffect(() => {
+        setConfirmation({
+            idPokemon: Number(poke.id),
+            action: updateTemp.action,
+            description: "",
+            total: Number(updateTemp.total),
+            prevStock: Number(poke.stock),
+            date: Date()
+        });
+    },[updateTemp])
 
     const handleDescription = (e: any) => {
         setConfirmation(prevState => ({
@@ -77,7 +81,7 @@ const ConfirmationUpdate = () => {
                     <p className='text-xl'>{poke.stock + updateTemp.total}</p>
                 </div>
             </div>
-            <DetailStokOpname data={updateTemp} prevstock={confirmation.prevStock}/>
+            <DetailStokOpname data={updateTemp} prevstock={poke.stock} pokemonid={poke.id}/>
             <div className='w-full'>
                 <h3 className='font-bold text-[16px] mb-2 mt-4'>Catatan</h3>
                 <textarea className='w-full h-20 px-2 py-1 border-2 shadow-inner border-slate-300 rounded-md'

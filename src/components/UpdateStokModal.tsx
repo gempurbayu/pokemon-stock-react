@@ -17,6 +17,8 @@ const UpdateStokModal = (props: ModalProps) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    let [yes, setYes] = useState(true);
+
     let [update, setUpdate] = useState({
         pcs : 0,
         lusin: 0,
@@ -40,19 +42,20 @@ const UpdateStokModal = (props: ModalProps) => {
     }
 
     const handleLusin = (e: any) => {
-        let num = e.target.value * 12;
+        let num = Number(e.target.value) * 12;
         setLusin(num);
         setUpdate((prevState) => ({
             ...prevState,
-            lusin: e.target.value,
+            lusin: Number(e.target.value),
             total: num + pcs
           }))
     }
 
     const handleUpdate = () => {
         try{
-            dispatch(updateData(update) as any)
-            navigate('/confirmation')
+            dispatch(updateData(update) as any);
+            setYes(false);
+            navigate('/confirmation');
         }catch(error) {
             alert(error)
         }
@@ -60,7 +63,7 @@ const UpdateStokModal = (props: ModalProps) => {
 
     console.log(update)
 
-    if(open) {
+    if(( open && yes)) {
         return (
             <div className='absolute bg-gray-900 bg-opacity-40 w-[100vw] h-[100vh] top-0 left-0 text-basecolor'>
                 <div className='modal absolute p-6 w-11/12 h-[412px] opacity-100 bg-slate-100 left-[4%] top-[20%] shadow-lg rounded-lg text-center'>
